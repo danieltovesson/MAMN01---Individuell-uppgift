@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.danieltovesson.hellosensor.screens.Compass">
+    tools:context="com.example.danieltovesson.hellosensor.screens.CompassActivity">
 
 </android.support.constraint.ConstraintLayout>

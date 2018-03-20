@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.example.danieltovesson.hellosensor.R;
 
-public class Accelerometer extends AppCompatActivity {
+public class AccelerometerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
