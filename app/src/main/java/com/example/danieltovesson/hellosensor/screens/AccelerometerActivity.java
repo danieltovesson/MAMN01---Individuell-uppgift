@@ -1,7 +1,7 @@
 package com.example.danieltovesson.hellosensor.screens;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.danieltovesson.hellosensor.R;
 
