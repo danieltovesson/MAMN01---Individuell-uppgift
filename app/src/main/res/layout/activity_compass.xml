@@ -6,4 +6,23 @@
     android:layout_height="match_parent"
     tools:context="com.example.danieltovesson.hellosensor.screens.CompassActivity">
 
+    <TextView
+        android:id="@+id/compassTitleTextView"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/compassImageView"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        android:contentDescription="@string/compass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/compassTitleTextView"
+        app:srcCompat="@drawable/compass" />
 </android.support.constraint.ConstraintLayout>
