@@ -23,5 +23,6 @@
             android:name=".screens.AccelerometerActivity"
             android:label="@string/accelerometer" />
     </application>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
 </manifest>

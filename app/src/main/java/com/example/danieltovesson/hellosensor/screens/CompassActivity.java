@@ -1,10 +1,15 @@
 package com.example.danieltovesson.hellosensor.screens;
 
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
@@ -76,6 +81,21 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
         // Start animation
         compassImageView.startAnimation(rotateAnimation);
         currentDegree = -degree;
+
+        if (degree >= 345 || degree <= 15) {
+
+            // Play sound
+            final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.sound);
+            mediaPlayer.start();
+
+            // Vibrate for 500 milliseconds
+            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                vibrator.vibrate(500);
+            }
+        }
     }
 
     @Override
