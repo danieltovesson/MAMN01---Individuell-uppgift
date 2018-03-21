@@ -62,7 +62,7 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
         float degree = Math.round(event.values[0]);
 
         // Set compass title text view to show the number of degrees
-        compassTitleTextView.setText("Heading: " + Float.toString(degree) + " degrees");
+        compassTitleTextView.setText(getString(R.string.compass_heading, Float.toString(degree)));
 
         // Create rotation animation
         RotateAnimation rotateAnimation = new RotateAnimation(
