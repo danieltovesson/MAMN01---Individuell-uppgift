@@ -2,6 +2,7 @@ package com.example.danieltovesson.hellosensor.screens;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -15,10 +16,12 @@ import com.example.danieltovesson.hellosensor.R;
 public class AccelerometerActivity extends AppCompatActivity implements SensorEventListener {
 
     // Variables
-    private TextView xValueTextView, yValueTextView, zValueTextView;
+    private TextView xValueTextView, yValueTextView, zValueTextView, directionTextView;
     private SensorManager sensorManager;
     private Sensor accelerometerSensor;
     private boolean hasAccelerometerSensor = false;
+    private float[] coordinatesHistory = new float[2];
+    private String[] direction = {null, null};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
         xValueTextView = findViewById(R.id.xValueTextView);
         yValueTextView = findViewById(R.id.yValueTextView);
         zValueTextView = findViewById(R.id.zValueTextView);
+        directionTextView = findViewById(R.id.directionTextView);
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
     }
 
@@ -47,10 +51,61 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
     @Override
     public void onSensorChanged(SensorEvent event) {
 
+        // Get x, y and z coordinates
+        float xValue = event.values[0];
+        float yValue = event.values[1];
+        float zValue = event.values[2];
+
+        // Change background color when device is flat
+        if (xValue == 0 && yValue == 0) {
+            getWindow().getDecorView().setBackgroundColor(Color.GREEN);
+        } else {
+            getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+        }
+
         // Set coordinate text views
-        xValueTextView.setText(getString(R.string.coordinate, "X", Float.toString(event.values[0])));
-        yValueTextView.setText(getString(R.string.coordinate, "Y", Float.toString(event.values[1])));
-        zValueTextView.setText(getString(R.string.coordinate, "Z", Float.toString(event.values[2])));
+        xValueTextView.setText(getString(R.string.coordinate, "X", Float.toString(xValue)));
+        yValueTextView.setText(getString(R.string.coordinate, "Y", Float.toString(yValue)));
+        zValueTextView.setText(getString(R.string.coordinate, "Z", Float.toString(zValue)));
+
+        // Calculate change in x and y coordinates
+        float xChange = coordinatesHistory[0] - xValue;
+        float yChange = coordinatesHistory[1] - yValue;
+
+        // Save history for coordinates
+        coordinatesHistory[0] = xValue;
+        coordinatesHistory[1] = yValue;
+
+        // Check if it moved left or right
+        if (xChange > 2) {
+            direction[0] = "left";
+        } else if (xChange < -2) {
+            direction[0] = "right";
+        } else {
+            direction[0] = null;
+        }
+
+        // Check if it moved up or down
+        if (yChange > 2) {
+            direction[1] = "down";
+        } else if (yChange < -2) {
+            direction[1] = "up";
+        } else {
+            direction[1] = null;
+        }
+
+        // Print direction in direction text view
+        if (direction[0] != null || direction[1] != null) {
+            if (direction[0] != null && direction[1] != null) {
+                directionTextView.setText(getString(R.string.twoDirections, direction[0], direction[1]));
+            } else if (direction[0] != null) {
+                directionTextView.setText(getString(R.string.oneDirection, direction[0]));
+            } else if (direction[1] != null) {
+                directionTextView.setText(getString(R.string.oneDirection, direction[1]));
+            }
+        } else {
+            directionTextView.setText(getString(R.string.noDirection));
+        }
     }
 
     @Override
