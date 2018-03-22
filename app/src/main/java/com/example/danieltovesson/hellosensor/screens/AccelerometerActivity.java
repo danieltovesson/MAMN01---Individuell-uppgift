@@ -47,6 +47,10 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
     @Override
     public void onSensorChanged(SensorEvent event) {
 
+        // Set coordinate text views
+        xValueTextView.setText(getString(R.string.coordinate, "X", Float.toString(event.values[0])));
+        yValueTextView.setText(getString(R.string.coordinate, "Y", Float.toString(event.values[1])));
+        zValueTextView.setText(getString(R.string.coordinate, "Z", Float.toString(event.values[2])));
     }
 
     @Override
