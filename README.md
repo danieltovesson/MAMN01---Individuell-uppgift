@@ -27,4 +27,8 @@ https://developer.android.com/reference/android/hardware/SensorEvent.html
 
 **Använde detta svaret för att visa riktningen telefonen lutar**  
 https://stackoverflow.com/a/10477107/1206388  
-*Skrev om strängarna så att den mer förklarande visar hur telefonen lutar*
+*Skrev om strängarna så att den mer förklarande visar hur telefonen lutar.*
+
+**Använde denna guide för att lågpassfiltrera sensor data**  
+https://www.built.io/blog/applying-low-pass-filter-to-android-sensor-s-readings  
+*La logiken för lågpassfiltret i en egen klass så den kunde användas på både kompassvyn och acceleratorvyn.*
