@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.example.danieltovesson.hellosensor.R;
+import com.example.danieltovesson.hellosensor.helpers.Functions;
 
 public class AccelerometerActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -20,6 +21,7 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
     private SensorManager sensorManager;
     private Sensor accelerometerSensor;
     private boolean hasAccelerometerSensor = false;
+    private float[] lastAccelerometer = new float[3];
     private float[] coordinatesHistory = new float[2];
     private String[] direction = {null, null};
 
@@ -51,10 +53,13 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
     @Override
     public void onSensorChanged(SensorEvent event) {
 
+        // Adds a low pass filter to the sensor data
+        lastAccelerometer = Functions.lowPassFilter(event.values.clone(), lastAccelerometer);
+
         // Get x, y and z coordinates
-        float xValue = event.values[0];
-        float yValue = event.values[1];
-        float zValue = event.values[2];
+        float xValue = lastAccelerometer[0];
+        float yValue = lastAccelerometer[1];
+        float zValue = lastAccelerometer[2];
 
         // Change background color when device is flat
         if (xValue == 0 && yValue == 0) {

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.danieltovesson.hellosensor.R;
+import com.example.danieltovesson.hellosensor.helpers.Functions;
 
 public class CompassActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -68,11 +69,11 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
                 currentDegree = updateCurrentDegree();
                 break;
             case Sensor.TYPE_ACCELEROMETER:
-                System.arraycopy(event.values, 0, lastAccelerometer, 0, event.values.length);
+                lastAccelerometer = Functions.lowPassFilter(event.values.clone(), lastAccelerometer);
                 lastAccelerometerSet = true;
                 break;
             case Sensor.TYPE_MAGNETIC_FIELD:
-                System.arraycopy(event.values, 0, lastMagnetField, 0, event.values.length);
+                lastMagnetField = Functions.lowPassFilter(event.values.clone(), lastMagnetField);
                 lastMagnetFieldSet = true;
                 break;
         }
