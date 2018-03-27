@@ -62,7 +62,7 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
         float zValue = lastAccelerometer[2];
 
         // Change background color when device is flat
-        if (xValue == 0 && yValue == 0) {
+        if (xValue > -0.5 && xValue < 0.5 && yValue > -0.5 && yValue < 0.5) {
             getWindow().getDecorView().setBackgroundColor(Color.GREEN);
         } else {
             getWindow().getDecorView().setBackgroundColor(Color.WHITE);
@@ -82,18 +82,18 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
         coordinatesHistory[1] = yValue;
 
         // Check if it moved left or right
-        if (xChange > 2) {
+        if (xChange > 0.1) {
             direction[0] = "left";
-        } else if (xChange < -2) {
+        } else if (xChange < -0.1) {
             direction[0] = "right";
         } else {
             direction[0] = null;
         }
 
         // Check if it moved up or down
-        if (yChange > 2) {
+        if (yChange > 0.1) {
             direction[1] = "down";
-        } else if (yChange < -2) {
+        } else if (yChange < -0.1) {
             direction[1] = "up";
         } else {
             direction[1] = null;
