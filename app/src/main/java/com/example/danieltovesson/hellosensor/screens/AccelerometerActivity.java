@@ -22,7 +22,6 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
     private Sensor accelerometerSensor;
     private boolean hasAccelerometerSensor = false;
     private float[] lastAccelerometer = new float[3];
-    private float[] coordinatesHistory = new float[2];
     private String[] direction = {null, null};
 
     @Override
@@ -61,45 +60,30 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
         float yValue = lastAccelerometer[1];
         float zValue = lastAccelerometer[2];
 
-        // Change background color when device is flat
-        if (xValue > -0.5 && xValue < 0.5 && yValue > -0.5 && yValue < 0.5) {
-            getWindow().getDecorView().setBackgroundColor(Color.GREEN);
-        } else {
-            getWindow().getDecorView().setBackgroundColor(Color.WHITE);
-        }
-
         // Set coordinate text views
         xValueTextView.setText(getString(R.string.coordinate, "X", Float.toString(xValue)));
         yValueTextView.setText(getString(R.string.coordinate, "Y", Float.toString(yValue)));
         zValueTextView.setText(getString(R.string.coordinate, "Z", Float.toString(zValue)));
 
-        // Calculate change in x and y coordinates
-        float xChange = coordinatesHistory[0] - xValue;
-        float yChange = coordinatesHistory[1] - yValue;
-
-        // Save history for coordinates
-        coordinatesHistory[0] = xValue;
-        coordinatesHistory[1] = yValue;
-
         // Check if it moved left or right
-        if (xChange > 0.1) {
+        if (xValue > 0.5) {
             direction[0] = "left";
-        } else if (xChange < -0.1) {
+        } else if (xValue < -0.5) {
             direction[0] = "right";
         } else {
             direction[0] = null;
         }
 
         // Check if it moved up or down
-        if (yChange > 0.1) {
-            direction[1] = "down";
-        } else if (yChange < -0.1) {
+        if (yValue > 0.5) {
             direction[1] = "up";
+        } else if (yValue < -0.5) {
+            direction[1] = "down";
         } else {
             direction[1] = null;
         }
 
-        // Print direction in direction text view
+        // Print direction in direction text view and change background color if phone is flat
         if (direction[0] != null || direction[1] != null) {
             if (direction[0] != null && direction[1] != null) {
                 directionTextView.setText(getString(R.string.twoDirections, direction[0], direction[1]));
@@ -108,8 +92,10 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
             } else if (direction[1] != null) {
                 directionTextView.setText(getString(R.string.oneDirection, direction[1]));
             }
+            getWindow().getDecorView().setBackgroundColor(Color.WHITE);
         } else {
             directionTextView.setText(getString(R.string.noDirection));
+            getWindow().getDecorView().setBackgroundColor(Color.GREEN);
         }
     }
 
