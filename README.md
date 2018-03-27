@@ -5,7 +5,7 @@
 
 * Kompassvyn visar vilken grad mobilen pekar åt och vibrerar och avger ljud om den pekar norrut. 
 
-* Accelerometervyn visar vilken x-, y- och z-riktning mobilen har. Håller man telefonen platt så kommer skärmen att lysa grönt. Om man roterar telefonen kommer man se vilken riktning man roterar åt.
+* Accelerometervyn visar vilken x-, y- och z-riktning mobilen har. Håller man telefonen platt så kommer skärmen att lysa grönt. Om man roterar telefonen kommer man se vilken riktning telefonen lutar åt.
 
 **Använde denna guiden för att skapa kompassen**  
 https://www.wlsdevelop.com/index.php/en/blog?option=com_content&view=article&id=38  
