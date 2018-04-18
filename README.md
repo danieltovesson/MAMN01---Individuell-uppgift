@@ -5,7 +5,7 @@
 
 * Kompassvyn visar vilken grad mobilen pekar åt och vibrerar och avger ljud om den pekar norrut. 
 
-* Accelerometervyn visar vilken x-, y- och z-riktning mobilen har. Håller man telefonen platt så kommer skärmen att lysa grönt. Om man roterar telefonen kommer man se vilken riktning man roterar åt.
+* Accelerometervyn visar vilken x-, y- och z-riktning mobilen har. Håller man telefonen platt så kommer skärmen att lysa grönt. Om man roterar telefonen kommer man se vilken riktning telefonen lutar åt.
 
 **Använde denna guiden för att skapa kompassen**  
 https://www.wlsdevelop.com/index.php/en/blog?option=com_content&view=article&id=38  
@@ -27,7 +27,7 @@ https://developer.android.com/reference/android/hardware/SensorEvent.html
 
 **Använde detta svaret för att visa riktningen telefonen lutar**  
 https://stackoverflow.com/a/10477107/1206388  
-*Skrev om strängarna så att den mer förklarande visar hur telefonen lutar.*
+*Skrev om så den visar lutning istället för vilken riktning man gör rörelse i. Skrev även om strängarna så att den mer förklarande visar hur telefonen lutar.*
 
 **Använde denna guide för att lågpassfiltrera sensor data**  
 https://www.built.io/blog/applying-low-pass-filter-to-android-sensor-s-readings  
